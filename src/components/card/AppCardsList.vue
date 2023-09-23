@@ -3,16 +3,25 @@ import AppCard from "./AppCard.vue";
 import { store } from "../../data/store";
 
 export default {
-  data() {
-    return { store };
-  },
   components: { AppCard },
+  data() {
+    return {
+      store,
+    };
+  },
+
+  computed: {
+    cardCount() {
+      return store.cardList.length;
+    },
+  },
 };
 </script>
 
 <template>
   <div class="container">
-    <div class="row row-cols-6">
+    <div class="row row-cols-5">
+      <div class="count_results">Found {{ cardCount }} cards</div>
       <AppCard
         v-for="card in store.cardList"
         :key="card.id"
@@ -30,5 +39,13 @@ export default {
   gap: 1rem;
   justify-content: center;
   background-color: white;
+  .count_results {
+    background-color: black;
+    color: white;
+    padding: 30px;
+    width: 85%;
+    font-size: xx-large;
+    font-weight: bold;
+  }
 }
 </style>
